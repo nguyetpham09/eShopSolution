@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.WebApp", "eShopSolution.WebApp\eShopSolution.WebApp.csproj", "{E28ECB5E-2EC1-42B9-9291-0AFB517450D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.Data", "eShopSolution.Data\eShopSolution.Data.csproj", "{1F5BBE77-FFFD-4535-8D8E-C4A373271F18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.Application", "eShopSolution.Application\eShopSolution.Application.csproj", "{20971E65-E621-4376-9ED8-9D85610D756E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E28ECB5E-2EC1-42B9-9291-0AFB517450D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E28ECB5E-2EC1-42B9-9291-0AFB517450D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E28ECB5E-2EC1-42B9-9291-0AFB517450D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F5BBE77-FFFD-4535-8D8E-C4A373271F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F5BBE77-FFFD-4535-8D8E-C4A373271F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F5BBE77-FFFD-4535-8D8E-C4A373271F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F5BBE77-FFFD-4535-8D8E-C4A373271F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20971E65-E621-4376-9ED8-9D85610D756E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20971E65-E621-4376-9ED8-9D85610D756E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20971E65-E621-4376-9ED8-9D85610D756E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20971E65-E621-4376-9ED8-9D85610D756E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
