@@ -17,6 +17,8 @@ namespace eShopSolution.Data.Configurations
 
             builder.Property(x => x.Id).UseIdentityColumn();
 
+            builder.Property(x => x.Id).UseIdentityColumn();
+
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(50);
 
             builder.Property(x => x.ShipName).IsRequired().HasMaxLength(200);
