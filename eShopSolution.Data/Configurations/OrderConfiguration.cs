@@ -27,8 +27,6 @@ namespace eShopSolution.Data.Configurations
 
             builder.Property(x => x.ShipAddress).IsRequired().HasMaxLength(256);
 
-            builder.Property(x => x.OrderDate).HasDefaultValue(DateTime.Now);
-
             builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         }
     }
