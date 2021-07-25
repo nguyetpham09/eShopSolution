@@ -1,5 +1,6 @@
 using eShopSolution.Application.Catalog.Products.Interface;
 using eShopSolution.Application.Catalog.Products.Services;
+using eShopSolution.Application.Common;
 using eShopSolution.Data.EF;
 using eShopSolution.Utilities.Constants;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,9 @@ namespace eShopSolution.BackendApi
             services.AddDbContext<EShopDbContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
             //Declare DI
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductServices, PublicProductServices>();
+            services.AddTransient<IManageProductServices, ManageProductServices>();
 
             services.AddControllersWithViews();
 
