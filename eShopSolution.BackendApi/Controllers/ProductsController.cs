@@ -12,25 +12,23 @@ namespace eShopSolution.BackendApi.Controllers
     [Authorize]
     public class ProductsController : ControllerBase
     {
-        private readonly IPublicProductServices _publicProductServices;
-        private readonly IManageProductServices _manageProductServices;
-        public ProductsController(IPublicProductServices publicProductServices, IManageProductServices manageProductServices)
+        private readonly IProductServices _productServices;
+        public ProductsController(IProductServices manageProductServices)
         {
-            _publicProductServices = publicProductServices;
-            _manageProductServices = manageProductServices;
+            _productServices = manageProductServices;
         }
 
         [HttpGet("{languageId}")]
         public async Task<IActionResult> GetAllPaging(string languageId, [FromQuery] GetPublicProductPagingRequest request)
         {
-            var products = await _publicProductServices.GetAllByCategoryId(languageId, request);
+            var products = await _productServices.GetAllByCategoryId(languageId, request);
             return Ok(products);
         }
 
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
-            var product = await _manageProductServices.GetById(productId, languageId);
+            var product = await _productServices.GetById(productId, languageId);
             if (product == null) return BadRequest("Cannot find product");
             return Ok(product);
         }
@@ -43,14 +41,14 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var productId = await _manageProductServices.Create(request);
+            var productId = await _productServices.Create(request);
 
             if (productId == 0)
             {
                 return BadRequest("Cannot create product");
             }
 
-            var product = _manageProductServices.GetById(productId, request.LanguageId);
+            var product = _productServices.GetById(productId, request.LanguageId);
 
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
@@ -63,7 +61,7 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             
-            var affectedResult = await _manageProductServices.Update(request);
+            var affectedResult = await _productServices.Update(request);
 
             if (affectedResult == 0)
             {
@@ -75,7 +73,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpDelete("{productId}")]
         public async Task<IActionResult> Delete(int productId)
         {
-            var affectedResult = await _manageProductServices.Delete(productId);
+            var affectedResult = await _productServices.Delete(productId);
             if (affectedResult == 0) return BadRequest();
             return Ok();
         }
@@ -83,7 +81,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpPatch("{productId}/{newPrice}")]
         public async Task<IActionResult> UpdatePrice (int productId, decimal newPrice)
         {
-            var isSuccessful = await _manageProductServices.UpdatePrice(productId, newPrice);
+            var isSuccessful = await _productServices.UpdatePrice(productId, newPrice);
             if (isSuccessful) return Ok();
             return BadRequest();
         }
@@ -91,7 +89,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpGet("{productId}/images/{imageId}")]
         public async Task<IActionResult> GetImageById (int imageId)
         {
-            var image = await _manageProductServices.GetImageById(imageId);
+            var image = await _productServices.GetImageById(imageId);
             if (image == null) return BadRequest($"Cannot find image with id {imageId}");
             return Ok(image);
         }
@@ -104,14 +102,14 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var imageId = await _manageProductServices.AddImage(productId, request);
+            var imageId = await _productServices.AddImage(productId, request);
 
             if (imageId == 0)
             {
                 return BadRequest("Cannot create image");
             }
 
-            var image = _manageProductServices.GetImageById(imageId);
+            var image = _productServices.GetImageById(imageId);
 
             return CreatedAtAction(nameof(GetImageById), new { id = image.Id }, image);
         }
@@ -124,7 +122,7 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var affectedResult = await _manageProductServices.UpdateImage(imageId, request);
+            var affectedResult = await _productServices.UpdateImage(imageId, request);
 
             if (affectedResult == 0)
             {
@@ -136,7 +134,7 @@ namespace eShopSolution.BackendApi.Controllers
         [HttpDelete("{productId}/images/{imageId}")]
         public async Task<IActionResult> DeleteImage(int imageId)
         {
-            var affectedResult = await _manageProductServices.RemoveImage(imageId);
+            var affectedResult = await _productServices.RemoveImage(imageId);
             if (affectedResult == 0) return BadRequest();
             return Ok();
         }
