@@ -43,6 +43,27 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost] 
+        public async Task<IActionResult> Create([FromBody] RegisterRequest registerRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ModelState);
+            }
+
+            var result = await _userApiClient.RegisterUser(registerRequest);
+            
+            if (result) return RedirectToAction("Index");
+            
+            return View(registerRequest);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
