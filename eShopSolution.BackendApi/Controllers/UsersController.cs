@@ -1,60 +1,64 @@
-﻿using eShopSolution.Application.System.Users;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using eShopSolution.Application.System.Users;
 using eShopSolution.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eShopSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class UsersController : ControllerBase
     {
-        private readonly IUserServices _userServices;
+        private readonly IUserServices _userService;
 
-        public UsersController(IUserServices userServices)
+        public UsersController(IUserServices userService)
         {
-            _userServices = userServices;
+            _userService = userService;
         }
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
-        public async Task<IActionResult> Authenticate ([FromBody] LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            var resultToken = await _userServices.Authenticate(request);
+            var resultToken = await _userService.Authenticate(request);
 
             if (string.IsNullOrEmpty(resultToken))
             {
-                return BadRequest("Username or Password is invalid");
+                return BadRequest("Username or password is incorrect.");
             }
-            return Ok (resultToken);
+            return Ok(resultToken);
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register ([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            var result = await _userServices.Register(request);
-
-            if (!result) return BadRequest("Register is unsuccessful");
-
+            var result = await _userService.Register(request);
+            if (!result)
+            {
+                return BadRequest("Register is unsuccessful.");
+            }
             return Ok();
         }
 
+        //http://localhost/api/users/paging?pageIndex=1&pageSize=10&keyword=
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetUserListRequest request)
         {
-            var users = await _userServices.GetUserListsAsync(request);
-            return Ok(users);
+            var products = await _userService.GetUserListsAsync(request);
+            return Ok(products);
         }
     }
 }

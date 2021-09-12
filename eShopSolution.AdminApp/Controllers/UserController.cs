@@ -28,17 +28,16 @@ namespace eShopSolution.AdminApp.Controllers
             _configuration = configuration;
         }
         
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string keyword="1", int pageIndex = 1, int pageSize = 10)
         {
-            var session = HttpContext.Session.GetString("Token");
+            var sessions = HttpContext.Session.GetString("Token");
             var request = new GetUserListRequest()
             {
-                BearerToken = session,
+                BearerToken = sessions,
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-
             var data = await _userApiClient.GetUserListAsync(request);
             return View(data);
         }

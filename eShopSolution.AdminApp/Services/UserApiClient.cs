@@ -35,16 +35,16 @@ namespace eShopSolution.AdminApp.Services
             return token;
         }
 
+
         public async Task<PageResult<UserViewModel>> GetUserListAsync(GetUserListRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
-            var response = await client.GetAsync($"api/user/paging/pageIndex={request.PageIndex}&" +
-                $"pageSize={request.PageSize}&keyword={request.Keyword}");
+            var response = await client.GetAsync($"/api/users/paging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
             var body = await response.Content.ReadAsStringAsync();
             var users = JsonConvert.DeserializeObject<PageResult<UserViewModel>>(body);
-
             return users;
         }
     }
