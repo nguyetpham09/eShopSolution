@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Tables</h1>
+    <h1 class="mt-4">Quản lý người dùng</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách người dùng</li>
@@ -57,9 +57,9 @@
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id}) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id}) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </td>
                         </tr>
                     }
