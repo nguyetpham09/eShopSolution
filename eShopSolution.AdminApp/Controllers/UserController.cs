@@ -33,6 +33,13 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetById(id);
+            return View(result.ResultObj);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
