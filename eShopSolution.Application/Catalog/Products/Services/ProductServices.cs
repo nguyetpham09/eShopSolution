@@ -166,6 +166,8 @@ namespace eShopSolution.Application.Catalog.Products.Services
             var pageResult = new PageResult<ProductViewModel>()
             {
                 TotalRecords = totalRaw,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
                 Items = data
             };
             return pageResult;
@@ -354,6 +356,8 @@ namespace eShopSolution.Application.Catalog.Products.Services
             var pageResult = new PageResult<ProductViewModel>()
             {
                 TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 Items = data
             };
             return pageResult;
