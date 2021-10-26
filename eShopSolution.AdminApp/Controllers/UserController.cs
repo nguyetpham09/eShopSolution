@@ -19,7 +19,7 @@ namespace eShopSolution.AdminApp.Controllers
          
         }
         
-        public async Task<IActionResult> Index(string keyword="1", int pageIndex = 1, int pageSize = 1)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 1)
         {
             var sessions = HttpContext.Session.GetString("Token");
             var request = new GetUserListRequest()
@@ -29,6 +29,7 @@ namespace eShopSolution.AdminApp.Controllers
                 PageSize = pageSize
             };
             var data = await _userApiClient.GetUserListAsync(request);
+            ViewBag.Keyword = keyword;
             return View(data.ResultObj);
         }
 
@@ -103,7 +104,7 @@ namespace eShopSolution.AdminApp.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
