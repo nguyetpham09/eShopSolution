@@ -25,6 +25,7 @@ namespace eShopSolution.ViewModels.System.Users
         public string UserName { get; set; }
         
         [Display(Name = "Ngày sinh")]
+        [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
     }
 }
