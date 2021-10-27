@@ -5,6 +5,13 @@
     ViewData["Title"] = "Danh sách người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 0);
+    </script>
+}
 <div class="container-fluid px-4">
     <h1 class="mt-4">Quản lý người dùng</h1>
     <ol class="breadcrumb mb-4">
@@ -33,6 +40,15 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -74,8 +90,8 @@
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id}) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id}) |
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </td>
                         </tr>
