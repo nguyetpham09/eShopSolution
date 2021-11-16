@@ -13,5 +13,6 @@ namespace eShopSolution.Application.System.Users
         Task<ApiResult<PageResult<UserViewModel>>> GetUserListsAsync(GetUserListRequest request);
         Task<ApiResult<UserViewModel>> GetById(Guid id);
         Task<ApiResult<bool>> Delete(Guid id);
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
     }
 }

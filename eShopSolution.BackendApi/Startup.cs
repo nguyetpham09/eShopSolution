@@ -1,6 +1,7 @@
 using eShopSolution.Application.Catalog.Products.Interface;
 using eShopSolution.Application.Catalog.Products.Services;
 using eShopSolution.Application.Common;
+using eShopSolution.Application.System.Roles;
 using eShopSolution.Application.System.Users;
 using eShopSolution.Data.EF;
 using eShopSolution.Data.Entities;
@@ -51,9 +52,10 @@ namespace eShopSolution.BackendApi
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<IRoleService, RoleService>();
 
-            services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
-            services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()); ;

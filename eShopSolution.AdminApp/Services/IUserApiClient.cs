@@ -1,8 +1,6 @@
 ﻿using eShopSolution.ViewModels.Common;
 using eShopSolution.ViewModels.System.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace eShopSolution.AdminApp.Services
@@ -20,5 +18,7 @@ namespace eShopSolution.AdminApp.Services
         Task<ApiResult<UserViewModel>> GetById(Guid id);
 
         Task<ApiResult<bool>> Delete(Guid id);
+
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
     }
 }
