@@ -126,10 +126,10 @@ namespace eShopSolution.Application.Catalog.Products.Services
             //Select
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
-                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
-                        join c in _context.Categories on pic.CategoryId equals c.Id
+                        //join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                        //join c in _context.Categories on pic.CategoryId equals c.Id
                         where pt.LanguageId == request.LanguageId
-                        select new { p, pt, pic };
+                        select new { p, pt};
 
             //Filters
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -137,10 +137,10 @@ namespace eShopSolution.Application.Catalog.Products.Services
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
             }
 
-            if (request.CategoryIds != null && request.CategoryIds.Count() > 0)
-            {
-                query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
-            }
+            //if (request.CategoryIds != null && request.CategoryIds.Count() > 0)
+            //{
+            //    query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
+            //}
 
             //Paging 
             int totalRaw = await query.CountAsync();
