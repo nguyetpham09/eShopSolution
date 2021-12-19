@@ -54,7 +54,8 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductCreateRequest request)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
             {

@@ -33,15 +33,15 @@ namespace eShopSolution.AdminApp.Services
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSetting.DefaultLanguageId);
             var requestContent = new MultipartFormDataContent();
-            if (request.ThumnailImage != null)
+            if (request.ThumbnailImage != null)
             {
                 byte[] data;
-                using (var br = new BinaryReader(request.ThumnailImage.OpenReadStream()))
+                using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
                 {
-                    data = br.ReadBytes((int)request.ThumnailImage.OpenReadStream().Length);
+                    data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
                 }
                 ByteArrayContent bytes = new ByteArrayContent(data);
-                requestContent.Add(bytes, "thumbnailImage", request.ThumnailImage.FileName);
+                requestContent.Add(bytes, "thumbnailImage", request.ThumbnailImage.FileName);
             }
 
             requestContent.Add(new StringContent(request.Price.ToString()), "price");
