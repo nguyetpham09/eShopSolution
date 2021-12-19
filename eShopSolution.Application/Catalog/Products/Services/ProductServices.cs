@@ -83,7 +83,7 @@ namespace eShopSolution.Application.Catalog.Products.Services
                 }
             };
             // Save image
-            if (request.ThumnailImage != null)
+            if (request.ThumbnailImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
                 {
@@ -91,8 +91,8 @@ namespace eShopSolution.Application.Catalog.Products.Services
                     {
                         Caption = "Thumnail image",
                         DateCreated = DateTime.Now,
-                        FileSize = request.ThumnailImage.Length,
-                        ImagePath = await this.SaveFile(request.ThumnailImage),
+                        FileSize = request.ThumbnailImage.Length,
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
                         IsDefault = true,
                         SortOrder = 1
                     }
